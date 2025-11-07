@@ -93,9 +93,12 @@ in
     programs.git = {
       enable = true;
       
-      # These should be customized by the user
-      userName = mkDefault "Your Name";
-      userEmail = mkDefault "your.email@example.com";
+      # IMPORTANT: Users MUST set these values in their home.nix
+      # Example:
+      #   programs.git.userName = "Your Name";
+      #   programs.git.userEmail = "your.email@example.com";
+      userName = mkDefault "CHANGE-ME";
+      userEmail = mkDefault "CHANGE-ME@example.com";
 
       # 📝 Git aliases for productivity
       aliases = {

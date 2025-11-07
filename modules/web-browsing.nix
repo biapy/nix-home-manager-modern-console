@@ -16,9 +16,8 @@ in
     home.packages = with pkgs; [
       # 🌐 chawan - Terminal web browser with modern features
       # Homepage: https://sr.ht/~bptato/chawan/
-      # Note: chawan might not be in stable nixpkgs yet
-      # Attempting to include it
-      (if (builtins.hasAttr "chawan" pkgs) then chawan else null)
+      # Note: chawan is not yet available in nixpkgs stable
+      # Users can add it manually if available in their nixpkgs version
 
       # 🦎 lynx - Classic terminal web browser
       # Homepage: https://lynx.invisible-island.net/
@@ -82,7 +81,7 @@ in
       # 📊 timg - Terminal image viewer
       # Homepage: https://github.com/hzeller/timg
       timg
-    ] ++ (lib.filter (x: x != null) []);  # Filter out null packages
+    ];
 
     # Configure lynx
     programs.lynx = {

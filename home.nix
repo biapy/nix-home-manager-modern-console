@@ -17,8 +17,14 @@
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage.
+  # ⚠️ IMPORTANT: You MUST change these values before using this configuration!
   home.username = lib.mkDefault "your-username";
   home.homeDirectory = lib.mkDefault "/home/your-username";
+
+  # ⚠️ IMPORTANT: You MUST also set your Git credentials!
+  # Override in this file or in modules/development.nix:
+  #   programs.git.userName = "Your Name";
+  #   programs.git.userEmail = "your.email@example.com";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
