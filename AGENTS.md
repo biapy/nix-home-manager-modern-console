@@ -678,7 +678,41 @@ If uncertain about:
 
 ---
 
-**Version**: 1.0.0  
+## 📋 Maintaining This Document
+
+**⚠️ IMPORTANT**: AI agents MUST keep this document up to date!
+
+When working on this project, if you:
+- **Discover new best practices** → Add them to the relevant section
+- **Identify new common pitfalls** → Document them in "Common Pitfalls"
+- **Create new patterns or conventions** → Add examples and explanations
+- **Change project structure** → Update "Module Structure" section
+- **Modify commit format requirements** → Update "Commit Standards"
+- **Add new tools or dependencies** → Update relevant sections
+- **Learn from mistakes or issues** → Document the lesson learned
+
+### Update Procedure
+
+1. **Make changes** to AGENTS.md in the same commit as related code changes
+2. **Update "Last Updated"** field to current date (YYYY-MM-DD format)
+3. **Increment version** following semver:
+   - Patch (1.0.X): Minor clarifications, typo fixes
+   - Minor (1.X.0): New sections, significant additions
+   - Major (X.0.0): Breaking changes to conventions
+4. **Commit format**: `docs(agents): 📝 update <what changed>`
+
+Example:
+```bash
+# When adding new best practice
+git add AGENTS.md
+git commit -m "docs(agents): 📝 update with new module testing pattern"
+```
+
+**Self-Improvement**: This document is a living guide that should evolve with the project. Every AI agent contributes to making it better for future agents.
+
+---
+
+**Version**: 1.1.0  
 **Last Updated**: 2025-11-11  
-**Maintained by**: Project Contributors
+**Maintained by**: Project Contributors and AI Agents
 
