@@ -3,7 +3,12 @@
 # This is an example configuration showing how to customize the modern console tools.
 # Copy this file to ~/.config/home-manager/home.nix or use it as reference.
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # Import the modern console modules

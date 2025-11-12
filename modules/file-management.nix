@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -9,12 +14,12 @@ in
   options.modern-console.file-management = {
     enable = mkEnableOption ''
       file management and synchronization tools.
-      
+
       This module provides comprehensive file management capabilities including
       terminal file managers, backup tools, archiving utilities, file watchers,
       and synchronization tools. It includes both traditional and modern tools
       for all file-related operations.
-      
+
       **Key features:**
       - **File Managers:** ranger, nnn, lf, mc (configured with plugins)
       - **Search & Indexing:** mlocate, plocate for fast file searches
@@ -24,7 +29,7 @@ in
       - **Watchers:** watchexec, entr, inotify-tools
       - **Utilities:** trash-cli (safe deletion), tree, exiftool
       - **Media:** ffmpeg, mediainfo for file conversion and inspection
-      
+
       File managers are configured with sensible defaults and shell aliases
       provide safer file operations (interactive prompts for rm/cp/mv).
     '';
@@ -184,26 +189,26 @@ in
         # Use external image previews
         set preview_images true
         set preview_images_method kitty
-        
+
         # Show hidden files
         set show_hidden true
-        
+
         # Sort options
         set sort natural
         set sort_case_insensitive true
-        
+
         # Which viewmode should be used?
         set viewmode miller
-        
+
         # Draw borders
         set draw_borders both
-        
+
         # Use Unicode ellipsis character
         set unicode_ellipsis true
-        
+
         # Abbreviate $HOME with ~ in the titlebar
         set tilde_in_titlebar true
-        
+
         # Open files with rifle
         set open_all_images true
       '';

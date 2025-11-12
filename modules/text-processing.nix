@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -9,11 +14,11 @@ in
   options.modern-console.text-processing = {
     enable = mkEnableOption ''
       text processing and manipulation tools.
-      
+
       This module provides tools for text manipulation, structured data processing,
       fuzzy finding, document conversion, and text utilities. It covers everything
       from simple text cutting to complex CSV/JSON processing and document conversion.
-      
+
       **Key features:**
       - **Text Manipulation:** tuc, f2 (batch renaming), sd (modern sed)
       - **Structured Data:** miller, csvkit for CSV/JSON processing
@@ -25,7 +30,7 @@ in
       - **Spreadsheets:** visidata (terminal spreadsheet tool)
       - **PDF Tools:** pdfgrep for searching PDFs
       - **Visualization:** termgraph for drawing graphs
-      
+
       fzf is configured with fd integration, sensible defaults, and
       shell integrations for Ctrl+R history search and file finding.
     '';

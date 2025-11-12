@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -9,12 +14,12 @@ in
   options.modern-console.system-monitoring = {
     enable = mkEnableOption ''
       system monitoring and diagnostic tools.
-      
+
       This module provides comprehensive system monitoring, process management,
       hardware diagnostics, and performance profiling tools. It includes modern
       replacements for classic tools like top/htop, as well as specialized
       utilities for detailed system analysis.
-      
+
       **Key features:**
       - **Process Monitors:** btop, htop, gotop, glances (configured)
       - **System Info:** neofetch, fastfetch, inxi, screenfetch
@@ -24,7 +29,7 @@ in
       - **Benchmarking:** sysbench, stress, stress-ng
       - **Health:** smartmontools for drive health monitoring
       - **USB:** cyme (modern lsusb replacement)
-      
+
       Both btop and htop are pre-configured with optimal settings for
       tree view, color schemes, and sensible update intervals.
     '';

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -9,12 +14,12 @@ in
   options.modern-console.development = {
     enable = mkEnableOption ''
       development tools and comprehensive git configuration.
-      
+
       This module provides essential development tools including Git utilities,
       build tools, text editors, and file format processors. It includes a
       comprehensive Git configuration with best practices, useful aliases,
       and integration with modern diff tools.
-      
+
       **Key features:**
       - Git CLI tools: `gh`, `lazygit`, `gitui`, `tig`, `delta`
       - Build tools: `just`, `direnv`
@@ -23,7 +28,7 @@ in
       - Git configuration with 30+ productivity aliases
       - Delta integration for beautiful diffs
       - Automatic credential caching
-      
+
       **Important:** You must set `programs.git.userName` and `programs.git.userEmail`
       in your configuration, as the defaults are placeholders.
     '';

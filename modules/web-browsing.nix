@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -9,12 +14,12 @@ in
   options.modern-console.web-browsing = {
     enable = mkEnableOption ''
       terminal web browsers and related tools.
-      
+
       This module provides terminal-based web browsers, RSS readers, HTML
       processing tools, media downloaders, and terminal image viewers.
       All tools are configured for optimal terminal-based web browsing
       and content consumption.
-      
+
       **Key features:**
       - **Browsers:** lynx, w3m, links2, elinks (configured with vi keys)
       - **RSS Readers:** newsboat with sample feeds and vim-like bindings
@@ -23,7 +28,7 @@ in
       - **Media Playback:** mpv with youtube-dl integration
       - **Image Viewers:** viu, chafa, timg for terminal image display
       - **Utilities:** html-xml-utils for HTML manipulation
-      
+
       Lynx is configured with UTF-8 support, vi keybindings, and cookie
       acceptance. Newsboat includes default tech news feeds and is configured
       with vim-like navigation and automatic reload every 30 minutes.
@@ -137,12 +142,18 @@ in
       urls = [
         {
           url = "https://news.ycombinator.com/rss";
-          tags = [ "tech" "news" ];
+          tags = [
+            "tech"
+            "news"
+          ];
           title = "Hacker News";
         }
         {
           url = "https://lobste.rs/rss";
-          tags = [ "tech" "programming" ];
+          tags = [
+            "tech"
+            "programming"
+          ];
           title = "Lobsters";
         }
       ];
@@ -154,24 +165,24 @@ in
         reload-threads 4
         download-retries 4
         download-timeout 30
-        
+
         # Display
         show-read-feeds no
         show-read-articles yes
-        
+
         # Vim-like keybindings
         bind-key j down
         bind-key k up
         bind-key l open
         bind-key h quit
-        
+
         # Browser
         browser "${pkgs.lynx}/bin/lynx %u"
-        
+
         # Feed display
         articlelist-format "%4i %f %D %?T?|%-17T| ?%t"
         feedlist-format "%4i %n %11u %t"
-        
+
         # Colors
         color listnormal cyan default
         color listfocus black yellow standout bold
@@ -179,7 +190,7 @@ in
         color listfocus_unread yellow default bold
         color info red black bold
         color article white default
-        
+
         # Highlighting
         highlight all "---.*---" yellow
         highlight feedlist ".*(0/0))" black

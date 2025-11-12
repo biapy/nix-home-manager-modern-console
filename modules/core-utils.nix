@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -9,12 +14,12 @@ in
   options.modern-console.core-utils = {
     enable = mkEnableOption ''
       modern core utilities that provide better alternatives to classic Unix tools.
-      
+
       This module includes modern replacements for common command-line tools like
       `ls`, `cat`, `grep`, `find`, `du`, `df`, and many others. These tools offer
       improved performance, better defaults, and enhanced user interfaces with features
       like syntax highlighting, better formatting, and more intuitive options.
-      
+
       **Key tools included:**
       - `ripgrep` - Fast recursive regex search
       - `fd` - Simple and fast alternative to `find`
@@ -23,7 +28,7 @@ in
       - `zoxide` - Smarter `cd` command that learns your habits
       - `duf` - Better disk usage display than `df`
       - `dust` - Intuitive disk usage analyzer (better `du`)
-      
+
       All tools are configured with sensible defaults and shell integrations.
     '';
   };

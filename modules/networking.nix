@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -9,12 +14,12 @@ in
   options.modern-console.networking = {
     enable = mkEnableOption ''
       networking and security tools.
-      
+
       This module provides a comprehensive set of networking utilities for
       diagnostics, security scanning, HTTP clients, and network monitoring.
       It includes both modern replacements for classic tools and specialized
       utilities for various networking tasks.
-      
+
       **Key features:**
       - **Scanning:** nmap, rustscan for network discovery
       - **DNS Tools:** dog (modern dig replacement)
@@ -25,7 +30,7 @@ in
       - **Tunneling:** bore-cli for exposing local services
       - **Security:** ssh-audit, mkcert for SSL certificates
       - **WebSocket:** websocat client/server
-      
+
       SSH is configured with security best practices including compression,
       connection keep-alive, and proper authentication preferences.
     '';
@@ -115,18 +120,18 @@ in
       extraConfig = ''
         # Security settings
         HashKnownHosts yes
-        
+
         # Connection settings
         TCPKeepAlive yes
         ServerAliveInterval 60
         ServerAliveCountMax 3
-        
+
         # Compression
         Compression yes
-        
+
         # Use SSH agent
         AddKeysToAgent yes
-        
+
         # Prevent SSH from trying different auth methods
         PreferredAuthentications publickey,keyboard-interactive,password
       '';

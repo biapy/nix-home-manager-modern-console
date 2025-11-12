@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -9,12 +14,12 @@ in
   options.modern-console.shell = {
     enable = mkEnableOption ''
       modern shell enhancements and utilities.
-      
+
       This module provides tools to enhance your shell experience including
       beautiful prompts, smart history search, terminal multiplexers, and
       shell utilities. It configures both Bash and Zsh with sensible defaults,
       productivity aliases, and integrations.
-      
+
       **Key features:**
       - **Prompts:** Starship (with custom theme), powerline-go
       - **History:** Atuin (magical shell history), mcfly
@@ -23,7 +28,7 @@ in
       - **Development:** shellcheck, shfmt for linting/formatting
       - **Recording:** asciinema, vhs for terminal recordings
       - **Colorizers:** grc, ccze for colorful output
-      
+
       Bash and Zsh are configured with history management, completion,
       syntax highlighting (Zsh), and productivity aliases.
     '';
@@ -228,8 +233,15 @@ in
       enable = true;
       enableCompletion = true;
 
-      historyControl = [ "ignoredups" "ignorespace" ];
-      historyIgnore = [ "ls" "cd" "exit" ];
+      historyControl = [
+        "ignoredups"
+        "ignorespace"
+      ];
+      historyIgnore = [
+        "ls"
+        "cd"
+        "exit"
+      ];
 
       shellOptions = [
         "histappend"
@@ -272,13 +284,13 @@ in
         # Better history search
         bind '"\e[A": history-search-backward'
         bind '"\e[B": history-search-forward'
-        
+
         # Enable ** recursive globbing
         shopt -s globstar
-        
+
         # Case-insensitive completion
         bind 'set completion-ignore-case on'
-        
+
         # Immediate history append
         PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
       '';
@@ -326,10 +338,10 @@ in
       initExtra = ''
         # Vi mode
         bindkey -v
-        
+
         # Better history search
         bindkey '^R' history-incremental-search-backward
-        
+
         # Edit command line
         autoload -Uz edit-command-line
         zle -N edit-command-line
@@ -348,36 +360,36 @@ in
       extraConfig = ''
         # Enable mouse support
         set -g mouse on
-        
+
         # Start window numbering at 1
         set -g base-index 1
         set -g pane-base-index 1
-        
+
         # Renumber windows when one is closed
         set -g renumber-windows on
-        
+
         # Increase scrollback buffer
         set -g history-limit 50000
-        
+
         # Set escape time to 0
         set -sg escape-time 0
-        
+
         # Enable true color
         set -ga terminal-overrides ",*256col*:Tc"
-        
+
         # Better splitting
         bind | split-window -h -c "#{pane_current_path}"
         bind - split-window -v -c "#{pane_current_path}"
-        
+
         # Vim-like pane navigation
         bind h select-pane -L
         bind j select-pane -D
         bind k select-pane -U
         bind l select-pane -R
-        
+
         # Reload config
         bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded!"
-        
+
         # Copy mode bindings
         bind-key -T copy-mode-vi v send-keys -X begin-selection
         bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
