@@ -7,7 +7,28 @@ let
 in
 {
   options.modern-console.text-processing = {
-    enable = mkEnableOption "text processing and manipulation tools";
+    enable = mkEnableOption ''
+      text processing and manipulation tools.
+      
+      This module provides tools for text manipulation, structured data processing,
+      fuzzy finding, document conversion, and text utilities. It covers everything
+      from simple text cutting to complex CSV/JSON processing and document conversion.
+      
+      **Key features:**
+      - **Text Manipulation:** tuc, f2 (batch renaming), sd (modern sed)
+      - **Structured Data:** miller, csvkit for CSV/JSON processing
+      - **Interactive Tools:** fzf (fuzzy finder), peco, jless (JSON viewer)
+      - **Document Conversion:** pandoc (universal converter), poppler_utils
+      - **Cheatsheets:** tealdeer (tldr), cheat for quick command references
+      - **Linting:** vale for prose linting, prettier for formatting
+      - **Utilities:** figlet (ASCII art), grex (regex generator)
+      - **Spreadsheets:** visidata (terminal spreadsheet tool)
+      - **PDF Tools:** pdfgrep for searching PDFs
+      - **Visualization:** termgraph for drawing graphs
+      
+      fzf is configured with fd integration, sensible defaults, and
+      shell integrations for Ctrl+R history search and file finding.
+    '';
   };
 
   config = mkIf cfg.enable {
@@ -109,7 +130,7 @@ in
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
-      
+
       defaultCommand = "fd --type f --hidden --follow --exclude .git";
       defaultOptions = [
         "--height 40%"
@@ -117,14 +138,14 @@ in
         "--border"
         "--inline-info"
       ];
-      
+
       fileWidgetCommand = "fd --type f --hidden --follow --exclude .git";
       changeDirWidgetCommand = "fd --type d --hidden --follow --exclude .git";
     };
 
     # 📋 Tealdeer (tldr) configuration
     # Auto-update the cache
-    home.activation.updateTldr = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    home.activation.updateTldr = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD ${pkgs.tealdeer}/bin/tldr --update || true
     '';
   };

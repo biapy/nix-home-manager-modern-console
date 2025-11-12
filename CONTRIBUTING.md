@@ -3,12 +3,93 @@
 Thank you for your interest in contributing! This project aims to provide a comprehensive, well-organized collection of modern command-line tools for Home Manager users.
 
 ## 📋 Table of Contents
+- [Development Environment](#development-environment)
 - [How to Contribute](#how-to-contribute)
 - [Adding New Tools](#adding-new-tools)
 - [Improving Documentation](#improving-documentation)
 - [Testing Changes](#testing-changes)
 - [Code Style](#code-style)
 - [Pull Request Process](#pull-request-process)
+
+## 🛠️ Development Environment
+
+This project uses [devenv](https://devenv.sh/) to provide a consistent development environment with all necessary tools.
+
+### Quick Setup
+
+1. **Install devenv** (if not already installed):
+   ```bash
+   nix profile install --accept-flake-config github:cachix/devenv/latest
+   ```
+
+2. **Clone the repository**:
+   ```bash
+   git clone https://github.com/biapy/nix-home-manager-modern-console.git
+   cd nix-home-manager-modern-console
+   ```
+
+3. **Enter the development environment**:
+   ```bash
+   # Option 1: Manual activation
+   devenv shell
+   
+   # Option 2: Use direnv (recommended)
+   direnv allow
+   # Now the environment activates automatically when you cd into the directory
+   ```
+
+### Available Commands
+
+The devenv provides a task runner with common operations:
+
+```bash
+# List all available tasks
+task --list
+
+# Common development tasks
+task switch              # Apply home-manager configuration
+task format              # Format all code (Nix, Markdown, Shell)
+task lint                # Run all linters
+task security:secrets    # Scan for secrets
+
+# Testing
+nix flake check         # Validate flake syntax
+task switch --dry-run   # Test configuration without applying
+```
+
+### What's Included
+
+The development environment includes:
+- ✅ **go-task** - Task runner for common operations
+- ✅ **home-manager** & **nixos-rebuild** - Build and deploy tools
+- ✅ **Formatters** - nixpkgs-fmt, mdformat, shfmt
+- ✅ **Linters** - shellcheck, markdownlint, nixpkgs-fmt check
+- ✅ **Git hooks** - commitizen (conventional commits), gitleaks (secret scanning)
+- ✅ **Security** - gitleaks for detecting secrets in commits
+
+### Git Commit Messages
+
+Git hooks enforce [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+```
+type(scope): description
+
+[optional body]
+[optional footer]
+```
+
+When you commit, **commitizen** will interactively prompt you for:
+- Commit type (feat, fix, docs, etc.)
+- Scope (optional)
+- Description
+- Body (optional)
+- Breaking changes (optional)
+
+**Or use gitmoji + conventional commits** (see AGENTS.md for details):
+
+```bash
+git commit -m "✨ feat(core-utils): add ripgrep for fast searching"
+```
 
 ## 🚀 How to Contribute
 
@@ -122,6 +203,48 @@ Good documentation is crucial! You can help by:
 
 ## 🧪 Testing Changes
 
+### Using devenv (Recommended)
+
+```bash
+# Enter development environment
+devenv shell
+# or if using direnv, just cd into the directory
+
+# Format your code
+task format
+
+# Run linters
+task lint
+
+# Check for secrets
+task security:secrets
+
+# Validate Nix syntax
+nix flake check
+
+# Test configuration (dry-run)
+task switch --dry-run
+
+# Apply configuration for testing
+task switch
+```
+
+### Without devenv
+
+```bash
+# Format Nix code
+nix fmt
+
+# Check flake syntax
+nix flake check
+
+# Test home-manager build
+home-manager build --flake .
+
+# Apply and test
+home-manager switch --flake .
+```
+
 ### Local Testing
 
 1. Clone your fork:
@@ -224,11 +347,23 @@ fix(development): correct git delta configuration
 
 ### Before Submitting
 
-1. ✅ Test your changes locally
-2. ✅ Update relevant documentation
-3. ✅ Follow the code style guidelines
-4. ✅ Make sure commits are well-formed
-5. ✅ Rebase on latest main if needed
+1. ✅ **Test your changes locally**
+   ```bash
+   task format  # Format code
+   task lint    # Run linters
+   nix flake check
+   ```
+
+2. ✅ **Update relevant documentation**
+3. ✅ **Follow the code style guidelines**
+4. ✅ **Make commits with conventional commit format**
+   - If using devenv, commitizen will guide you
+   - Or manually follow gitmoji + conventional commits format
+5. ✅ **Scan for secrets**
+   ```bash
+   task security:secrets
+   ```
+6. ✅ **Rebase on latest main if needed**
 
 ### Submitting the PR
 

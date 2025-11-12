@@ -13,27 +13,27 @@
   ];
 
   # 👤 User Information - REQUIRED: Set your username and home directory
-  home.username = "johndoe";  # Replace with your username
-  home.homeDirectory = "/home/johndoe";  # Replace with your home directory
+  home.username = "johndoe"; # Replace with your username
+  home.homeDirectory = "/home/johndoe"; # Replace with your home directory
 
   # 🎨 Customize which tool categories to enable
   # All categories are enabled by default, but you can disable any you don't want
   modern-console = {
-    core-utils.enable = true;          # Modern alternatives to Unix tools
-    development.enable = true;         # Dev tools and git configuration
-    networking.enable = true;          # Network and security tools
-    text-processing.enable = true;     # Text manipulation tools
-    system-monitoring.enable = true;   # System monitoring tools
-    file-management.enable = true;     # File managers and sync tools
-    web-browsing.enable = true;        # Terminal web browsers
-    shell.enable = true;               # Shell enhancements
+    core-utils.enable = true; # Modern alternatives to Unix tools
+    development.enable = true; # Dev tools and git configuration
+    networking.enable = true; # Network and security tools
+    text-processing.enable = true; # Text manipulation tools
+    system-monitoring.enable = true; # System monitoring tools
+    file-management.enable = true; # File managers and sync tools
+    web-browsing.enable = true; # Terminal web browsers
+    shell.enable = true; # Shell enhancements
   };
 
   # ✏️ Override git configuration
   programs.git = {
     userName = "John Doe";
     userEmail = "john.doe@example.com";
-    
+
     # Add your own aliases (these are in addition to the defaults)
     aliases = {
       # Your custom aliases here

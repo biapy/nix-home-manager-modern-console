@@ -7,7 +7,27 @@ let
 in
 {
   options.modern-console.file-management = {
-    enable = mkEnableOption "file management and synchronization tools";
+    enable = mkEnableOption ''
+      file management and synchronization tools.
+      
+      This module provides comprehensive file management capabilities including
+      terminal file managers, backup tools, archiving utilities, file watchers,
+      and synchronization tools. It includes both traditional and modern tools
+      for all file-related operations.
+      
+      **Key features:**
+      - **File Managers:** ranger, nnn, lf, mc (configured with plugins)
+      - **Search & Indexing:** mlocate, plocate for fast file searches
+      - **Synchronization:** rsync, rclone (cloud), borgbackup
+      - **Backup:** restic, borg (deduplicating backups)
+      - **Archiving:** ouch, p7zip, zip/unzip, atool (universal wrapper)
+      - **Watchers:** watchexec, entr, inotify-tools
+      - **Utilities:** trash-cli (safe deletion), tree, exiftool
+      - **Media:** ffmpeg, mediainfo for file conversion and inspection
+      
+      File managers are configured with sensible defaults and shell aliases
+      provide safer file operations (interactive prompts for rm/cp/mv).
+    '';
   };
 
   config = mkIf cfg.enable {
@@ -79,7 +99,7 @@ in
 
       # 🔍 dua - Disk Usage Analyzer (modern ncdu)
       # Homepage: https://github.com/Byron/dua-cli
-      du-dust  # Already in core-utils, but worth noting
+      du-dust # Already in core-utils, but worth noting
 
       # 🔧 File manipulation
       # rename - Perl-based file renaming utility
@@ -159,7 +179,7 @@ in
     # Configure ranger with better defaults
     programs.ranger = {
       enable = true;
-      
+
       extraConfig = ''
         # Use external image previews
         set preview_images true
@@ -193,20 +213,20 @@ in
     programs.nnn = {
       enable = true;
       package = pkgs.nnn.override { withNerdIcons = true; };
-      
+
       bookmarks = {
         d = "~/Documents";
         D = "~/Downloads";
         p = "~/Projects";
         h = "~";
       };
-      
+
       extraPackages = with pkgs; [
         ffmpeg
         mediainfo
-        sxiv  # Image viewer (optional)
+        sxiv # Image viewer (optional)
       ];
-      
+
       plugins = {
         src = "${pkgs.nnn}/share/plugins";
         mappings = {
@@ -223,24 +243,24 @@ in
       cp = "cp -iv";
       mv = "mv -iv";
       rm = "rm -Iv";
-      
+
       # Use trash instead of rm for safety
       trash = "trash-put";
-      
+
       # Directory navigation
       ".." = "cd ..";
       "..." = "cd ../..";
       "...." = "cd ../../..";
-      
+
       # List files with eza (if available in core-utils)
       ll = "eza -l --group-directories-first --icons";
       la = "eza -la --group-directories-first --icons";
       lt = "eza --tree --level=2 --icons";
-      
+
       # Disk usage
       du1 = "du -h --max-depth=1";
       duf = "${pkgs.duf}/bin/duf";
-      
+
       # Find
       fd = "${pkgs.fd}/bin/fd";
     };

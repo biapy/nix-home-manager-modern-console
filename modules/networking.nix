@@ -7,7 +7,28 @@ let
 in
 {
   options.modern-console.networking = {
-    enable = mkEnableOption "networking and security tools";
+    enable = mkEnableOption ''
+      networking and security tools.
+      
+      This module provides a comprehensive set of networking utilities for
+      diagnostics, security scanning, HTTP clients, and network monitoring.
+      It includes both modern replacements for classic tools and specialized
+      utilities for various networking tasks.
+      
+      **Key features:**
+      - **Scanning:** nmap, rustscan for network discovery
+      - **DNS Tools:** dog (modern dig replacement)
+      - **Diagnostics:** trippy (traceroute), mtr, gping (visual ping)
+      - **Bandwidth:** bandwhich for process-level network monitoring
+      - **HTTP Clients:** httpie, curlie, xh for API testing
+      - **Downloads:** aria2 (multi-protocol, parallel downloads)
+      - **Tunneling:** bore-cli for exposing local services
+      - **Security:** ssh-audit, mkcert for SSL certificates
+      - **WebSocket:** websocat client/server
+      
+      SSH is configured with security best practices including compression,
+      connection keep-alive, and proper authentication preferences.
+    '';
   };
 
   config = mkIf cfg.enable {
@@ -89,7 +110,7 @@ in
     # 🔧 SSH Configuration with best practices
     programs.ssh = {
       enable = true;
-      
+
       # Global SSH configuration
       extraConfig = ''
         # Security settings

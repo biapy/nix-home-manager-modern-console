@@ -7,7 +7,28 @@ let
 in
 {
   options.modern-console.web-browsing = {
-    enable = mkEnableOption "terminal web browsers and related tools";
+    enable = mkEnableOption ''
+      terminal web browsers and related tools.
+      
+      This module provides terminal-based web browsers, RSS readers, HTML
+      processing tools, media downloaders, and terminal image viewers.
+      All tools are configured for optimal terminal-based web browsing
+      and content consumption.
+      
+      **Key features:**
+      - **Browsers:** lynx, w3m, links2, elinks (configured with vi keys)
+      - **RSS Readers:** newsboat with sample feeds and vim-like bindings
+      - **HTML Tools:** pup, htmlq for parsing and extracting HTML content
+      - **Media Downloads:** yt-dlp for downloading videos from various sites
+      - **Media Playback:** mpv with youtube-dl integration
+      - **Image Viewers:** viu, chafa, timg for terminal image display
+      - **Utilities:** html-xml-utils for HTML manipulation
+      
+      Lynx is configured with UTF-8 support, vi keybindings, and cookie
+      acceptance. Newsboat includes default tech news feeds and is configured
+      with vim-like navigation and automatic reload every 30 minutes.
+      mpv is configured for high-quality playback with hardware decoding.
+    '';
   };
 
   config = mkIf cfg.enable {
@@ -86,23 +107,23 @@ in
     # Configure lynx
     programs.lynx = {
       enable = true;
-      
+
       # Lynx configuration
       settings = {
         accept_all_cookies = true;
         character_set = "utf-8";
         display_charset = "utf-8";
         assume_charset = "utf-8";
-        
+
         # VI-like key bindings
         vi_keys = true;
-        
+
         # Show cursor
         show_cursor = true;
-        
+
         # Number links
         number_links = true;
-        
+
         # Default homepage
         startfile = "https://www.google.com";
       };
@@ -111,7 +132,7 @@ in
     # Configure newsboat (RSS reader)
     programs.newsboat = {
       enable = true;
-      
+
       # Default feeds (user should customize)
       urls = [
         {
@@ -125,7 +146,7 @@ in
           title = "Lobsters";
         }
       ];
-      
+
       extraConfig = ''
         # General settings
         auto-reload yes
@@ -171,31 +192,31 @@ in
     # Configure mpv for playing web videos
     programs.mpv = {
       enable = true;
-      
+
       config = {
         # Use hardware decoding when available
         hwdec = "auto";
-        
+
         # Better quality
         profile = "high-quality";
-        
+
         # Save position on quit
         save-position-on-quit = true;
-        
+
         # OSD settings
         osd-level = 1;
         osd-duration = 2000;
-        
+
         # Screenshot settings
         screenshot-format = "png";
         screenshot-png-compression = 8;
         screenshot-directory = "~/Pictures/mpv-screenshots";
-        
+
         # Youtube-dl integration
         ytdl = true;
         ytdl-format = "bestvideo[height<=?1080]+bestaudio/best";
       };
-      
+
       bindings = {
         # Additional key bindings
         "WHEEL_UP" = "seek 10";
@@ -209,11 +230,11 @@ in
     home.shellAliases = {
       # Quick web searches
       google = "lynx https://www.google.com/search?q=";
-      
+
       # Download videos
       dl-video = "yt-dlp";
       dl-audio = "yt-dlp -x --audio-format mp3";
-      
+
       # Quick web access
       web = "lynx";
       news = "newsboat";

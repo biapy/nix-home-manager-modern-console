@@ -294,6 +294,78 @@ home-manager generations
 home-manager switch --switch-generation <number>
 ```
 
+## 👨‍💻 Development
+
+This project uses [devenv](https://devenv.sh/) for a consistent development environment.
+
+### Setup Development Environment
+
+1. **Install devenv**:
+   ```bash
+   nix profile install --accept-flake-config github:cachix/devenv/latest
+   ```
+
+2. **Enter development shell**:
+   ```bash
+   # Option 1: Manual activation
+   devenv shell
+   
+   # Option 2: Use direnv (automatic activation)
+   direnv allow
+   ```
+
+### Development Commands
+
+```bash
+# List all available tasks
+task --list
+
+# Common operations
+task switch              # Apply configuration
+task format              # Format all code
+task lint                # Run linters
+task security:secrets    # Scan for secrets
+
+# Validation
+nix flake check         # Check Nix syntax
+task switch --dry-run   # Test without applying
+```
+
+### What's Included
+
+The development environment provides:
+- ✅ **Task runner** - go-task for common operations
+- ✅ **Formatters** - nixpkgs-fmt, mdformat, shfmt
+- ✅ **Linters** - shellcheck, markdownlint
+- ✅ **Git hooks** - commitizen, gitleaks
+- ✅ **Testing tools** - home-manager, nixos-rebuild
+
+### Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
+- Adding new tools
+- Testing changes
+- Code style
+- Pull request process
+
+**Quick contribution checklist:**
+```bash
+# 1. Make your changes
+
+# 2. Format and lint
+task format && task lint
+
+# 3. Check for issues
+nix flake check
+task security:secrets
+
+# 4. Test configuration
+task switch --dry-run
+
+# 5. Commit with conventional format
+git commit -m "✨ feat(category): description"
+```
+
 ## 📝 Git Best Practices Included
 
 This configuration includes git best practices:
@@ -307,7 +379,17 @@ This configuration includes git best practices:
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to:
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+**Quick start for contributors:**
+1. Fork and clone the repository
+2. Set up the development environment with `devenv shell` or `direnv allow`
+3. Make your changes
+4. Run `task format && task lint`
+5. Test with `task switch --dry-run`
+6. Submit a pull request
+
+Feel free to:
 - Add new tools
 - Improve configurations
 - Fix bugs
@@ -323,7 +405,12 @@ Thanks to all the amazing open-source projects and their maintainers that make m
 
 ## 📖 Additional Resources
 
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines and development setup
+- [AGENTS.md](AGENTS.md) - Guidelines for AI coding agents
+- [TOOLS.md](TOOLS.md) - Complete tool reference
+- [USAGE.md](USAGE.md) - Detailed usage examples
 - [Home Manager Manual](https://nix-community.github.io/home-manager/)
 - [Nix Package Search](https://search.nixos.org/packages)
 - [NixOS Wiki](https://nixos.wiki/)
 - [Modern Unix Tools List](https://github.com/ibraheemdev/modern-unix)
+- [devenv Documentation](https://devenv.sh/)

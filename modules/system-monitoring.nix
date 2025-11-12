@@ -7,7 +7,27 @@ let
 in
 {
   options.modern-console.system-monitoring = {
-    enable = mkEnableOption "system monitoring and diagnostic tools";
+    enable = mkEnableOption ''
+      system monitoring and diagnostic tools.
+      
+      This module provides comprehensive system monitoring, process management,
+      hardware diagnostics, and performance profiling tools. It includes modern
+      replacements for classic tools like top/htop, as well as specialized
+      utilities for detailed system analysis.
+      
+      **Key features:**
+      - **Process Monitors:** btop, htop, gotop, glances (configured)
+      - **System Info:** neofetch, fastfetch, inxi, screenfetch
+      - **Hardware:** lm_sensors, acpi, nvtop (GPU), lsof, pciutils, usbutils
+      - **Performance:** sysstat (sar, iostat), iotop, nethogs, dstat
+      - **Debugging:** strace, ltrace, gdb for system call tracing
+      - **Benchmarking:** sysbench, stress, stress-ng
+      - **Health:** smartmontools for drive health monitoring
+      - **USB:** cyme (modern lsusb replacement)
+      
+      Both btop and htop are pre-configured with optimal settings for
+      tree view, color schemes, and sensible update intervals.
+    '';
   };
 
   config = mkIf cfg.enable {

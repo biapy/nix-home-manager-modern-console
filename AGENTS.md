@@ -321,7 +321,29 @@ Choose emojis that represent the tool's function:
 
 ### Before Committing
 
-Run these checks:
+Run these checks (using devenv):
+
+```bash
+# Format all code
+task format
+
+# Run linters
+task lint
+
+# Check for secrets
+task security:secrets
+
+# Check flake syntax and evaluation
+nix flake check
+
+# Show flake structure
+nix flake show
+
+# Test build
+task switch --dry-run
+```
+
+Or without devenv:
 
 ```bash
 # Format Nix code
@@ -383,6 +405,105 @@ nix build --impure --expr '
 ```
 
 ---
+
+## 🛠️ Development Environment
+
+This project uses [devenv](https://devenv.sh/) to provide a consistent development environment with all necessary tools and pre-configured tasks.
+
+### Setting Up devenv
+
+1. **Install devenv** (if not already installed):
+   ```bash
+   nix profile install --accept-flake-config github:cachix/devenv/latest
+   ```
+
+2. **Enter the development shell**:
+   ```bash
+   cd /path/to/nix-home-manager-modern-console
+   devenv shell
+   ```
+
+3. **Or use direnv** for automatic environment activation:
+   ```bash
+   # Enable direnv (one-time setup)
+   direnv allow
+   
+   # Now cd into the directory automatically activates the environment
+   cd /path/to/nix-home-manager-modern-console
+   ```
+
+### Available Tools in devenv
+
+The development environment includes:
+- **task** - Task runner for common operations
+- **home-manager** - For testing configurations
+- **nixos-rebuild** - For system rebuilds
+- **commitizen** - Enforced commit message standards
+- **gitleaks** - Secret scanning
+- **Various linters** - For Nix, Markdown, Shell scripts
+
+### Task Runner Commands
+
+The project uses [go-task](https://taskfile.dev/) for common operations:
+
+```bash
+# List all available tasks
+task --list
+
+# Apply home-manager configuration
+task switch
+# or
+task home
+
+# Build specific configurations
+task sunny    # Build sunny configuration
+task iego     # Build iego configuration
+
+# Read home-manager news
+task news
+
+# Formatting and linting
+task format:nix       # Format Nix code
+task format:markdown  # Format Markdown
+task lint:nix         # Lint Nix code
+task lint:shell       # Lint shell scripts
+
+# Security checks
+task security:secrets  # Scan for secrets with gitleaks
+```
+
+### devenv Configuration
+
+The devenv setup is configured in:
+- **`devenv.nix`** - Main configuration file
+- **`devenv.yaml`** - Flake inputs and imports
+- **`.envrc`** - Direnv integration
+- **`Taskfile.dist.yml`** - Generated task definitions
+
+### Git Hooks
+
+Pre-commit hooks are automatically installed via devenv:
+- **commitizen** - Ensures commit messages follow conventional commits format
+- **gitleaks** - Prevents committing secrets
+
+### Testing in devenv
+
+```bash
+# Enter the development shell
+devenv shell
+
+# Run flake checks
+nix flake check
+
+# Test home-manager build
+task switch --dry-run
+
+# Format all code
+task format
+
+# Run all linters
+task lint
+```
 
 ## 🔨 Common Tasks
 
@@ -712,7 +833,7 @@ git commit -m "docs(agents): 📝 update with new module testing pattern"
 
 ---
 
-**Version**: 1.1.0  
-**Last Updated**: 2025-11-11  
+**Version**: 1.2.0  
+**Last Updated**: 2025-11-12  
 **Maintained by**: Project Contributors and AI Agents
 

@@ -7,7 +7,26 @@ let
 in
 {
   options.modern-console.development = {
-    enable = mkEnableOption "development tools and git configuration";
+    enable = mkEnableOption ''
+      development tools and comprehensive git configuration.
+      
+      This module provides essential development tools including Git utilities,
+      build tools, text editors, and file format processors. It includes a
+      comprehensive Git configuration with best practices, useful aliases,
+      and integration with modern diff tools.
+      
+      **Key features:**
+      - Git CLI tools: `gh`, `lazygit`, `gitui`, `tig`, `delta`
+      - Build tools: `just`, `direnv`
+      - File processors: `jq`, `yq`, `pandoc`
+      - Markdown viewers: `glow`, `mdcat`
+      - Git configuration with 30+ productivity aliases
+      - Delta integration for beautiful diffs
+      - Automatic credential caching
+      
+      **Important:** You must set `programs.git.userName` and `programs.git.userEmail`
+      in your configuration, as the defaults are placeholders.
+    '';
   };
 
   config = mkIf cfg.enable {
@@ -92,7 +111,7 @@ in
     # 🔧 Git Configuration with Best Practices
     programs.git = {
       enable = true;
-      
+
       # IMPORTANT: Users MUST set these values in their home.nix
       # Example:
       #   programs.git.userName = "Your Name";
@@ -110,38 +129,38 @@ in
         cm = "commit -m";
         ca = "commit --amend";
         cane = "commit --amend --no-edit";
-        
+
         # Logging
         lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
         ll = "log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate --numstat";
         lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
         lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
-        
+
         # Diff
         df = "diff";
         dc = "diff --cached";
-        
+
         # Stash
         sl = "stash list";
         sa = "stash apply";
         ss = "stash save";
         sp = "stash pop";
-        
+
         # Undo last commit but keep changes
         undo = "reset HEAD~1 --mixed";
-        
+
         # Show last commit
         last = "log -1 HEAD --stat";
-        
+
         # List all aliases
         aliases = "config --get-regexp alias";
-        
+
         # Show contributors
         contributors = "shortlog --summary --numbered";
-        
+
         # Amend to last commit
         amend = "commit --amend --reuse-message=HEAD";
-        
+
         # Interactive rebase
         rb = "rebase";
         rbi = "rebase -i";
@@ -262,7 +281,7 @@ in
         ".DS_Store"
         "Thumbs.db"
         "Desktop.ini"
-        
+
         # Editor files
         "*~"
         "*.swp"
@@ -270,7 +289,7 @@ in
         ".vscode/"
         ".idea/"
         "*.sublime-*"
-        
+
         # Build artifacts
         "*.o"
         "*.pyc"
@@ -280,17 +299,17 @@ in
         "build/"
         "dist/"
         "target/"
-        
+
         # Dependencies
         "node_modules/"
         "vendor/"
         ".bundle/"
-        
+
         # Environment
         ".env"
         ".env.local"
         ".direnv/"
-        
+
         # Backup files
         "*.bak"
         "*.backup"

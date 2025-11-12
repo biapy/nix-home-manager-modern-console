@@ -7,7 +7,26 @@ let
 in
 {
   options.modern-console.shell = {
-    enable = mkEnableOption "modern shell enhancements and utilities";
+    enable = mkEnableOption ''
+      modern shell enhancements and utilities.
+      
+      This module provides tools to enhance your shell experience including
+      beautiful prompts, smart history search, terminal multiplexers, and
+      shell utilities. It configures both Bash and Zsh with sensible defaults,
+      productivity aliases, and integrations.
+      
+      **Key features:**
+      - **Prompts:** Starship (with custom theme), powerline-go
+      - **History:** Atuin (magical shell history), mcfly
+      - **Multiplexers:** tmux, zellij, screen (with vim-like bindings)
+      - **Utilities:** navi (cheatsheets), fzf alternative (skim)
+      - **Development:** shellcheck, shfmt for linting/formatting
+      - **Recording:** asciinema, vhs for terminal recordings
+      - **Colorizers:** grc, ccze for colorful output
+      
+      Bash and Zsh are configured with history management, completion,
+      syntax highlighting (Zsh), and productivity aliases.
+    '';
   };
 
   config = mkIf cfg.enable {
@@ -129,7 +148,7 @@ in
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
-      
+
       settings = {
         # Prompt format
         format = lib.concatStrings [
@@ -195,7 +214,7 @@ in
         golang.symbol = "🐹 ";
         nodejs.symbol = "⬢ ";
         java.symbol = "☕ ";
-        
+
         # Nix shell indicator
         nix_shell = {
           symbol = "❄️ ";
@@ -208,10 +227,10 @@ in
     programs.bash = {
       enable = true;
       enableCompletion = true;
-      
+
       historyControl = [ "ignoredups" "ignorespace" ];
       historyIgnore = [ "ls" "cd" "exit" ];
-      
+
       shellOptions = [
         "histappend"
         "checkwinsize"
@@ -219,27 +238,27 @@ in
         "globstar"
         "checkjobs"
       ];
-      
+
       shellAliases = {
         # Navigation shortcuts
         ".." = "cd ..";
         "..." = "cd ../..";
         "...." = "cd ../../..";
-        
+
         # Safety nets
         rm = "rm -i";
         cp = "cp -i";
         mv = "mv -i";
-        
+
         # Colorful output
         grep = "grep --color=auto";
         egrep = "egrep --color=auto";
         fgrep = "fgrep --color=auto";
-        
+
         # Shortcuts
         h = "history";
         c = "clear";
-        
+
         # Git shortcuts (if not using git aliases)
         g = "git";
         gs = "git status";
@@ -248,7 +267,7 @@ in
         gp = "git push";
         gl = "git pull";
       };
-      
+
       initExtra = ''
         # Better history search
         bind '"\e[A": history-search-backward'
@@ -271,7 +290,7 @@ in
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      
+
       history = {
         size = 10000;
         save = 10000;
@@ -279,22 +298,22 @@ in
         ignoreSpace = true;
         share = true;
       };
-      
+
       shellAliases = {
         # Navigation shortcuts
         ".." = "cd ..";
         "..." = "cd ../..";
         "...." = "cd ../../..";
-        
+
         # Safety nets
         rm = "rm -i";
         cp = "cp -i";
         mv = "mv -i";
-        
+
         # Shortcuts
         h = "history";
         c = "clear";
-        
+
         # Git shortcuts
         g = "git";
         gs = "git status";
@@ -303,7 +322,7 @@ in
         gp = "git push";
         gl = "git pull";
       };
-      
+
       initExtra = ''
         # Vi mode
         bindkey -v
@@ -325,7 +344,7 @@ in
       keyMode = "vi";
       terminal = "screen-256color";
       historyLimit = 10000;
-      
+
       extraConfig = ''
         # Enable mouse support
         set -g mouse on
@@ -370,7 +389,7 @@ in
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      
+
       settings = {
         auto_sync = true;
         sync_frequency = "5m";
@@ -388,11 +407,11 @@ in
       # Editor
       EDITOR = "vim";
       VISUAL = "vim";
-      
+
       # Pager
       PAGER = "less";
       LESS = "-R";
-      
+
       # Colors in man pages
       LESS_TERMCAP_mb = "\\e[1;32m";
       LESS_TERMCAP_md = "\\e[1;32m";
